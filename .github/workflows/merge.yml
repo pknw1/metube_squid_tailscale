@@ -31,7 +31,8 @@ jobs:
           docker push pknw1/squid-tailscale:latest
       - name: Build Metube
         run: |
-          cd ../metube-client
+          TIMESTAMP=$(date +%s)
+          cd metube-client
           docker build -t pknw1/metube-tailscale:${TIMESTAMP} .
           docker build -t pknw1/metube-tailscale:latest .
           docker push pknw1/metube-tailscale:${TIMESTAMP}
