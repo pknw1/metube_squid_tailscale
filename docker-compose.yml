@@ -1,0 +1,10 @@
+name: Bundle
+
+
+include:
+  - path : metube-client/docker-compose.yml
+    project_directory: metube-client
+    env_file: metube-client/.env
+  - path : squid-client/docker-compose.yml
+    project_directory: squid-client
+    env_file: squid-client/.env

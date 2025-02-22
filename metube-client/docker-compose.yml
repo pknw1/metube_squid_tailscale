@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   metube-tailscale:
-    enc_file: .env
+    env_file: .env
     image: pknw1/metube-tailscale 
     hostname: metube-tailscale
     container_name: metube-tailscale
@@ -10,7 +10,8 @@ services:
       - HTTP_PROXY=http://squid-tailscale:3128
       - TS_AUTHKEY=${TAILSCALE_AUTH}
       - TS_STATE_DIR=/var/lib/tailscale
-      - TS_USERSPACE=false
+      - TS_USERSPACE=true
+      - TS_ENABLE_METRICS=true
     volumes:
       - ./config/tailscale/state:/var/lib/tailscale
     devices:
@@ -19,7 +20,11 @@ services:
       - net_admin
     networks:
       - tailscale_proxy
+    dns:
+      - 8.8.8.8
     restart: unless-stopped
+    ports:
+      - 8180:8081
 
 networks:
   tailscale_proxy:

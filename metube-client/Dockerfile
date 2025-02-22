@@ -1,8 +1,8 @@
 FROM ghcr.io/alexta69/metube:latest as builder
 
 FROM tailscale/tailscale:latest
-ADD https://github.com/alexta69/metube/blob/master/Pipfile .
-ADD https://github.com/alexta69/metube/blob/master/Pipfile.lock .
+ADD https://raw.githubusercontent.com/alexta69/metube/refs/heads/master/Pipfile .
+ADD https://raw.githubusercontent.com/alexta69/metube/refs/heads/master/Pipfile.lock . 
 RUN apk add --update py3-pip nodejs npm python3 ffmpeg aria2 coreutils shadow su-exec curl tini && \
     apk add --update --virtual .build-deps gcc g++ musl-dev && \
     pip install --no-cache-dir pipenv && \
