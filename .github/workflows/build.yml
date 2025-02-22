@@ -31,7 +31,7 @@ jobs:
           docker build -t pknw1/squid-tailscale:${TIMESTAMP} .
       - name: Build Metube
         run: |
-          cd ../metube-client
+          cd metube-client
           docker build -t pknw1/metube-tailscale:${TIMESTAMP} .
 
 
