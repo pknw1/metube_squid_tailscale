@@ -1,0 +1,25 @@
+---
+version: "3.7"
+services:
+  squid-tailscale:
+    env_file: .env
+    image: pknw1/squid-tailscale 
+    hostname: squid-tailscale
+    container_name: squid-tailscale
+    environment:
+      - TS_AUTHKEY=${TAILSCALE_AUTH}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+    volumes:
+      - ./config/squid:/etc/squid/conf.d
+      - ./config/logs:/var/log/squid
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+    networks:
+      - tailscale_proxy
+    restart: unless-stopped
+
+networks:
+  tailscale_proxy:
